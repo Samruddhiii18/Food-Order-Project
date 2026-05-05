@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { clearErrors, resetPassword } from "../../actions/userAction";
@@ -8,7 +8,7 @@ const NewPassword = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  const alert = useAlert();
+  
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state.forgotPassword);
   const { token } = useParams();
@@ -18,11 +18,11 @@ const NewPassword = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (success) {
-      alert.success("Password updated succesfully");
+      toast.success("Password updated succesfully");
       navigate("/users/login");
     }
   }, [dispatch, alert, error, success, navigate]);

@@ -14,8 +14,6 @@
     "countries-list": "^2.6.1",
     "mdbreact": "^5.2.0",
     "react": "^18.2.0",
-    "react-alert": "^7.0.3",
-    "react-alert-template-basic": "^1.0.2",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
@@ -52,5 +50,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://127.0.0.1:4000"
+  "proxy": "http://127.0.0.1:4000",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
 }

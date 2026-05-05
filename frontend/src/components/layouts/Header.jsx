@@ -1,20 +1,20 @@
 import React from "react";
 import Search from "./Search";
 import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userAction";
 
 export default function Header() {
  
-  const alert = useAlert();
+  
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
 
   const logoutHandler = () => {
     dispatch(logout());
-    alert.success("Logged Out Successfully");
+    toast.success("Logged Out Successfully");
   };
 
   return (

@@ -30,7 +30,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   newOrder: newOrderReducer,
   myOrders: myOrderReducer,
-  orderDtails: orderDetailsReducer,
+  orderDetails: orderDetailsReducer,
 });
 
 const composeenhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

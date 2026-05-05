@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { MDBDataTable } from "mdbreact";
 import { FaRegEye, FaRupeeSign } from "react-icons/fa6";
 import Loader from "../layouts/Loader";
-import { useAlert } from "react-alert";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, myOrders } from "../../actions/orderAction";
 import { getRestaurants } from "../../actions/restaurantAction";
 import { Link } from "react-router-dom";
 const ListOrders = () => {
-  const alert = useAlert();
+  
   const dispatch = useDispatch();
 
   const { loading, error, orders } = useSelector((state) => state.myOrders);
@@ -20,7 +20,7 @@ const ListOrders = () => {
     dispatch(myOrders());
     dispatch(getRestaurants());
     if (error) {
-        alert.error(error);
+        toast.error(error);
         dispatch(clearErrors());
     }
   },[dispatch, alert, error]);

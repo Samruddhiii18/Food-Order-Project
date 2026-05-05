@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearErrors, register } from "../../actions/userAction";
 
 const Register = () => {
-  const alert = useAlert();
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ const Register = () => {
       navigate("/");
     }
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
   }, [dispatch, alert, isAuthenticated, error, navigate]);
@@ -41,7 +41,7 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== passwordConfirm) {
-      alert.error("Passwords don't match");
+      toast.error("Passwords don't match");
       return;
     }
 

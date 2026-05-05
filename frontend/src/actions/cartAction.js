@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import {
   ADD_TO_CART,
   FETCH_CART,
@@ -6,7 +7,7 @@ import {
   UPDATE_CART_ITEM,
 } from "../constants/cartConstant";
 
-export const fetchCartItems = (alert) => async (dispatch) => {
+export const fetchCartItems = () => async (dispatch) => {
   try {
     const response = await axios.get("/api/v1/eats/cart/get-cart");
     dispatch({
@@ -15,37 +16,34 @@ export const fetchCartItems = (alert) => async (dispatch) => {
     });
   } catch (error) {
     console.error("Fetch cart error", error);
-    if (alert) {
-      alert.info("Cart is hungry");
-    }
+    toast("Cart is empty");
   }
 };
 
 //ADD TO CART:
 export const addItemToCart =
-  (foodItemId, restaurant, quantity, alert) => async (dispatch, getState) => {
+  (foodItemId, restaurant, quantity) => async (dispatch, getState) => {
     try {
-      const { user } = getState().auth; //return current storage tree
+      const { user } = getState().auth;
       const response = await axios.post("/api/v1/eats/cart/add-to-cart", {
         userId: user._id,
         foodItemId,
         restaurantId: restaurant,
         quantity,
       });
-      alert.success("Item added to cart", response.data.cart);
+      toast.success("Item added to cart");
       dispatch({
         type: ADD_TO_CART,
         payload: response.data.cart,
       });
     } catch (error) {
-      alert.error(error.response ? error.response.data.message : error.message);
+      toast.error(error.response ? error.response.data.message : error.message);
     }
   };
 
 //update cart item quantity:
-
 export const updateCartQuantity =
-  (foodItemId, quantity, alert) => async (dispatch, getState) => {
+  (foodItemId, quantity) => async (dispatch, getState) => {
     try {
       const { user } = getState().auth;
 
@@ -63,13 +61,13 @@ export const updateCartQuantity =
         payload: response.data.cart,
       });
     } catch (error) {
-      alert.error(error.response ? error.response.data.message : error.message);
+      toast.error(error.response ? error.response.data.message : error.message);
     }
   };
 
 //Remove items from the cart:
 export const removeItemFromCart =
-  (foodItemId, alert) => async (dispatch, getState) => {
+  (foodItemId) => async (dispatch, getState) => {
     try {
       const { user } = getState().auth;
       if (typeof foodItemId === "object") {
@@ -86,6 +84,6 @@ export const removeItemFromCart =
         payload: response.data,
       });
     } catch (error) {
-      alert.error(error.response ? error.response.data.message : error.message);
+      toast.error(error.response ? error.response.data.message : error.message);
     }
   };

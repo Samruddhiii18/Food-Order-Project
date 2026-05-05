@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearErrors, loadUser, updateProfile } from "../../actions/userAction";
@@ -11,7 +11,7 @@ const UpdateProfile = () => {
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/images/images.png");
 
-  const alert = useAlert();
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,11 +25,11 @@ const UpdateProfile = () => {
       setAvatarPreview(user.avatar.url);
     }
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("User Updated Successfully!!");
+      toast.success("User Updated Successfully!!");
       dispatch(loadUser());
       navigate("/users/me");
       dispatch({

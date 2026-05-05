@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, forgotPassword } from "../../actions/userAction";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const alert = useAlert();
+  
   const dispatch = useDispatch();
   const { error, loading, message } = useSelector(
     (state) => state.forgotPassword
@@ -13,11 +13,11 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors);
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
     }
   }, [dispatch, alert, error, message]);
 
